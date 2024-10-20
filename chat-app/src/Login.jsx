@@ -59,7 +59,7 @@ const Login = () => {
         <form onSubmit={handleRegister}>
             <label htmlFor='file'>
                 <img src={avatar.url || './avatar.png'} alt="" />
-                Upload an Imahge</label>
+                Upload an Image</label>
         <input type="file"  id="file" style={{"display":'none'}} onChange={handleAvatar} />
         <input type="text" placeholder='Username' name="username" />
             <input type="email" placeholder='Enter Email' name="email" />
