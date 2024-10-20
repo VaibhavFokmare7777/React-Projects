@@ -1,6 +1,7 @@
 import React from "react";
 import "./addUser.css";
-const AddUser = () => {
+const AddUser = ({addMode}) => {
+  if(!addMode) return null
   return (
     <div className="addUser">
       <form>
