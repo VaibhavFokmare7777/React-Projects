@@ -7,6 +7,8 @@ import { doc, setDoc } from 'firebase/firestore';
 
 const Login = () => {
 
+    // handling uplaod image
+
     const [avatar,setAvatar]=useState({
         file:null,
         url:""
@@ -22,29 +24,39 @@ const Login = () => {
        
     }
 
+    //Login functionality
+
     const handleLogin=e=>{
       e.preventDefault();
       toast.success("Login Successfully!!");
     }
 
+   // Registration Functionality
+
     const handleRegister=async(e)=>{
       e.preventDefault();
+      
+      //create a FormData object from the form thast triggered the event
 
-      const formData= new FormData(e.target);
+      const formData= new FormData(e.target); 
+
+      //converting FormData object to regular Javascript object, extracting username, email and password
       const {username,email,password}=Object.fromEntries(formData);
      
       try{
+        //register user using email and password using Authentication instatnce auth
         const res= await createUserWithEmailAndPassword(auth,email,password);
         // console.log("response :",res);
          toast.success("Sign up successfully!! you can login now");
         
+         // for storing users data into firestore database
         await setDoc(doc(db, "users",res.user.uid), {
          username,
          email,
          id:res.user.uid,
          blocked:[],
         });
-
+        //for storing users chats data into firestore database
         await setDoc(doc(db, "userchats",res.user.uid), {
           chats:[],
          });
