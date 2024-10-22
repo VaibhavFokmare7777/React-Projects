@@ -4,6 +4,7 @@ import { toast } from 'react-toastify';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
 import {auth, db} from './lib/firebase'
 import { doc, setDoc } from 'firebase/firestore';
+import upload from './lib/upload';
 
 const Login = () => {
 
@@ -13,7 +14,7 @@ const Login = () => {
         file:null,
         url:""
     })
-
+   const [loading,setLoading]=useState(false);
     const handleAvatar= e =>{
         if(e.target.files[0]){
             setAvatar({
@@ -35,7 +36,7 @@ const Login = () => {
 
     const handleRegister=async(e)=>{
       e.preventDefault();
-      
+      setLoading(true);
       //create a FormData object from the form thast triggered the event
 
       const formData= new FormData(e.target); 
@@ -48,11 +49,15 @@ const Login = () => {
         const res= await createUserWithEmailAndPassword(auth,email,password);
         // console.log("response :",res);
          toast.success("Sign up successfully!! you can login now");
+
+        //Upload Image logic
+         const imgUrl= await upload(avatar.file);
         
          // for storing users data into firestore database
         await setDoc(doc(db, "users",res.user.uid), {
          username,
          email,
+         avatar:imgUrl,
          id:res.user.uid,
          blocked:[],
         });
@@ -67,6 +72,9 @@ const Login = () => {
         console.log(err);
         toast.error(err.code);
       }
+      finally{
+        setLoading(false);
+      }
       
     }
   return (
@@ -77,7 +85,7 @@ const Login = () => {
         <form onSubmit={handleLogin}>
             <input type="email" placeholder='Enter Email' name="email" />
             <input type="password" placeholder='Enter Password' name="password" />
-            <button>Sign In</button>
+            <button disabled={loading}>Sign In</button>
         </form>
       </div>
       <div className="sepearator"></div>
@@ -91,7 +99,7 @@ const Login = () => {
         <input type="text" placeholder='Username' name="username" />
             <input type="email" placeholder='Enter Email' name="email" />
             <input type="password" placeholder='Enter Password' name="password" />
-            <button>Sign Up</button>
+            <button disabled={loading}>{loading?"Loading":"Sign Up"}</button>
         </form>
       </div>
       
