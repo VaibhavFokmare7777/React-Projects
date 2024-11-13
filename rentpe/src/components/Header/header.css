@@ -1,0 +1,89 @@
+.container {
+    width: 100%;
+}
+
+.header {
+    width: 100%;
+    padding: 20px 60px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.header .logo img {
+    height: 80px;
+    width: 120px;
+    object-fit: cover;
+    border-radius: 20%;
+}
+
+.header .navbar {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+}
+
+.header .navbar ul {
+    display: flex;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    gap: 20px;
+}
+
+.header .navbar ul li {
+    margin: 0;
+    font-weight: bold;
+    font-size: 18px;
+    cursor: pointer;
+}
+
+.header .navbar ul li:hover {
+    color: #007BFF; /* Optional hover color */
+}
+
+.filter-button {
+    position: relative;
+}
+
+.filter-button button {
+    padding: 5px 10px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.filter-button button:hover {
+    background-color: #45a049;
+}
+
+.filter-options {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background-color: #fff;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+    padding: 10px;
+    border-radius: 8px;
+    width: 200px;
+    z-index: 10;
+}
+
+.filter-options label {
+    display: block;
+    margin-bottom: 10px;
+    font-size: 14px;
+}
+
+.filter-options select,
+.filter-options input[type="text"],
+.filter-options input[type="number"] {
+    width: 100%;
+    padding: 5px;
+    margin-top: 5px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
