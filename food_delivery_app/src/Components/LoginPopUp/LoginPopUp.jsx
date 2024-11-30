@@ -1,8 +1,17 @@
 import React, { useState } from 'react'
 import './LoginPopUp.css'
 import { assets } from '../../assets/assets';
+import 'font-awesome/css/font-awesome.min.css';
+
 const LoginPopUp = ({setShowLogin}) => {
     const [currStatus,setCurrStatus]=useState("Login");
+
+    const [passwordVisible, setPasswordVisible] = useState(false); // State to toggle password visibility
+
+  // Toggle password visibility
+  const togglePasswordVisibility = () => {
+    setPasswordVisible((prev) => !prev); // Toggle the visibility state
+  };
   return (
     <div className='login-popup'>
       <form  className="login-container">
@@ -14,7 +23,17 @@ const LoginPopUp = ({setShowLogin}) => {
         <div className="login-inputs">
             {currStatus==="Login"?<></>:<input type="text" placeholder='Your Name' required/>}
             <input type="email" placeholder='Your Email' required />
-            <input type="password" placeholder='Password' required />
+            <input
+              type={passwordVisible ? 'text' : 'password'} // Toggle between text and password type
+              placeholder="Password"
+              required
+            />
+             <i
+              className={`fa ${passwordVisible ? 'fa-eye-slash' : 'fa-eye'}`} // FontAwesome eye icon toggle
+              onClick={togglePasswordVisibility} // Toggle the visibility when clicked
+              style={{ cursor: 'pointer', position: 'absolute', right: '10px', top: '50%', transform: 'translateY(-50%)' }}
+              aria-hidden="true"
+            ></i>
 
         </div>
         <button>{currStatus==="Sign Up"?"Create account":"Login"}</button>
