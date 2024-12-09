@@ -14,9 +14,15 @@ function Navbar({setShowLogin}) {
     <div className='navbar'>
      <Link to='/'> <img src={assets.logo} alt="" className='logo'/></Link>
       <ul className='navbar-menu'>
+        <Link to='/'>
         <li onClick={()=>setMenu("Home")} className={menu==="Home"?"active":""}>Home</li>
-        <li onClick={()=>setMenu("Menu")} className={menu==="Menu"?"active":""}>Menu</li>
-        <li onClick={()=>setMenu("Mobile app")} className={menu==="Mobile app"?"active":""}>Mobile app</li>
+        </Link>
+       
+        <Link to='/cart'>
+        <li onClick={()=>setMenu("Cart")} className={menu==="Cart"?"active":""}>Cart</li>
+        </Link>
+       
+        <li onClick={()=>setMenu("My order")}  className={menu==="My order"?"active":""}>My Orders</li>
         <li onClick={()=>setMenu("Contact us")} className={menu==="Contact us"?"active":""}>Contact us</li>
       </ul>
       <div className="navbar-right">
