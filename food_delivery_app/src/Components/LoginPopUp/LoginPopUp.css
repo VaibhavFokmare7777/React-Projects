@@ -72,3 +72,24 @@
     font-weight: 500;
     cursor: pointer;
 }
+.password-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+  }
+  
+  .password-container input {
+    width: 100%; /* Ensure the input takes full width */
+    padding-right: 40px; /* Add space for the eye icon */
+  }
+  
+  .password-container i {
+    position: absolute;
+    right: 10px;
+    cursor: pointer;
+    color: #808080;
+    font-size: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+  
